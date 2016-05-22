@@ -1,4 +1,3 @@
-<<<<<<< HEAD
  <ion-view view-title="Sign Up">
       <ion-content>
         <form name="userForm" ng-submit="createAccount(user)" novalidate>
@@ -8,14 +7,6 @@
             <span class="input-label fixed">Username</span>
             <input type="text" name="first_name" ng-model="user.username" required>
           </label>
-=======
-<ion-modal-view>
-  <form name="userForm" ng-submit="submitForm(userForm.$valid)" novalidate>
-    <ion-view title="Sign Up">
-      <ion-content>
-
-        <ion-list>
->>>>>>> origin/master
 
           <label class="item item-input">
             <span class="input-label fixed">Name</span>
@@ -24,11 +15,7 @@
 
           <label class="item item-input">
             <span class="input-label">Given Name</span>
-<<<<<<< HEAD
             <input type="text" name="given_name" ng-model="user.gName" required>
-=======
-            <input type="text" name="given_name" ng-model="user.given_name" required>
->>>>>>> origin/master
           </label>
 
           <label class="item item-input">
@@ -49,13 +36,8 @@
 
           <label class="item item-input">
             <span class="input-label">Re-Enter Password</span>
-<<<<<<< HEAD
             <input type="password" name="pw2" id="pw2" ng-model="user.pass" required>
             <p ng-show="userForm.user.pass.$error.match && userForm.pw1.$dirty" class="help-block">Passwords do not match</p>
-=======
-            <input type="password" name="pw2" id="pw2" ng-model="pw2" required>
-            <p ng-show="pw1 != pw2 && userForm.pw1.$dirty" class="help-block">Passwords do not match</p>
->>>>>>> origin/master
           </label>
 
 
@@ -67,17 +49,8 @@
             <i ng-show="loading" class="ion-loading-b"></i>
           </button>
         </div>
-<<<<<<< HEAD
         </form>
-=======
-
->>>>>>> origin/master
 
       </ion-content>
 
     </ion-view>
-<<<<<<< HEAD
-=======
-  </form>
-</ion-modal-view>
->>>>>>> origin/master
