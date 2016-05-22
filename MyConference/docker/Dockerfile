@@ -18,5 +18,5 @@ RUN wget http://www.baasbox.com/download/baasbox-stable.zip && \
     mv baasbox*/ /etc/service/baasbox && \
     mkdir -p /etc/service/baasbox
 ADD baasbox_run /etc/serice/baasbox/run
-RUN chmod +x /etc/service/baasbox/run
+RUN chmod +x /etc/service/baasbox/start
 EXPOSE 80 9000
