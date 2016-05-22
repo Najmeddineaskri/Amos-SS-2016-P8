@@ -17,6 +17,5 @@ RUN wget http://www.baasbox.com/download/baasbox-stable.zip && \
     unzip -o baasbox-stable.zip && \
     mv baasbox*/ /etc/service/baasbox && \
     mkdir -p /etc/service/baasbox
+ADD baasbox_run /etc/service/baasbox/start
 RUN chmod +x /etc/service/baasbox/start
-EXPOSE 80 9000
-ENTRYPOINT /etc/service/baasbox/start -Dhttp.port=9000   -Dorient.baasbox.path="/persistent"
