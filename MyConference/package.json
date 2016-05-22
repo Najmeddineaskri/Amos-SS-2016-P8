@@ -24,11 +24,9 @@
     "cordova-plugin-statusbar",
     "ionic-plugin-keyboard"
   ],
-<<<<<<< HEAD
   "cordovaPlatforms": []
 =======
   "cordovaPlatforms": [
     "android"
   ]
->>>>>>> origin/master
 }
