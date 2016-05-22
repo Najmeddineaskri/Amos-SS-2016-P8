@@ -3,6 +3,7 @@
  */
 
 var services = angular.module('services', []);
+<<<<<<< HEAD
 services.factory('backendService', function () {
   var backend = {};
   backend.connect = function () { //this function connects the app to the backend, returns a promise
@@ -83,5 +84,49 @@ services.factory('backendService', function () {
   backend.getEventById = function (id) { // function for getting a event by its id, returns a promise
     return BaasBox.loadObject("events", id)
   }
+=======
+
+services.factory('backendService', function () {
+
+        BaasBox.setEndPoint("http://faui2o2a.cs.fau.de:30485"); //we will change it later to address of the chair server
+        BaasBox.appcode = "1234567890";
+        BaasBox.signup("admin", "admin")
+          .done(function (res) {
+            console.log("signup ", res);
+          })
+          .fail(function (error) {
+            console.log("error ", error);
+          });
+        BaasBox.login("admin", "admin")
+          .done(function (user) {
+            console.log("Logged in ", user);
+          })
+          .fail(function (err) {
+            console.log("error ", err);
+          });
+    var backend = {};
+
+  backend.getEvents = function () {
+    return BaasBox.loadCollection("events")
+  };
+
+
+     backend.createEvent = function (ev) {
+      var newEvent = new Object();
+      newEvent.title = ev.title;
+      newEvent.location = ev.location;
+      newEvent.date = ev.date;
+      newEvent.descr = ev.descr;
+      BaasBox.save(newEvent, "events")
+        .done(function(res) {
+          console.log("res ", res);
+        })
+        .fail(function(error) {
+          console.log("error ", error);
+        })
+    }
+
+
+>>>>>>> origin/master
   return backend;
 });

@@ -50,6 +50,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
           }
         }
       })
+<<<<<<< HEAD
 
       .state('app.start', {
         cache: false,
@@ -62,6 +63,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       })
 
+=======
+>>>>>>> origin/master
       .state('app.main', {
         cache: false,
         url: '/main',
@@ -78,6 +81,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         views: {
           'menuContent': {
             templateUrl: 'templates/event.html',
+<<<<<<< HEAD
             controller: 'EventCtrl'
           }
         }
@@ -90,6 +94,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
           'menuContent': {
             templateUrl: 'templates/login.html',
             controller: 'LoginCtrl'
+=======
+>>>>>>> origin/master
           }
         }
       })
@@ -103,6 +109,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
           }
         }
       })
+<<<<<<< HEAD
       
       .state('app.register', {
         url: '/register',
@@ -116,4 +123,10 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/start');
+=======
+
+
+    // if none of the above states are matched, use this as the fallback
+    $urlRouterProvider.otherwise('/app/main');
+>>>>>>> origin/master
   });

@@ -1,4 +1,5 @@
 <ion-view view-title="Overview">
+<<<<<<< HEAD
 <ion-nav-bar class="bar-stable">
       <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
@@ -26,4 +27,23 @@
 
 
     </ion-list>
+=======
+
+  <ion-content>
+    <ion-list>
+      <br>
+      <i class="icon ion-chevron-right"> UPCOMING</i><br><br>
+  <ion-item ng-repeat="ev in events"><a href="about">{{ev.title}} ({{ev.date}})</a></ion-item>
+
+
+   <i class="icon ion-chevron-right"> PREVIOUS</i><br><br>
+  <ion-item><a ui-sref="about">07/2015 Devcon</a></ion-item>
+  <ion-item><a ui-sref="about">06/2015 Devcon</a></ion-item>
+  <ion-item><a ui-sref="about">.....</a></ion-item>
+
+
+    </ion-list>
+
+  </ion-content>
+>>>>>>> origin/master
 </ion-view>
