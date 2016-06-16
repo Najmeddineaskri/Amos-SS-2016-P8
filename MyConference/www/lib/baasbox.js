@@ -67,7 +67,7 @@ var BaasBox = (function() {
 
     function buildDeferred() {
       var dfd = new $.Deferred();
-      var promise = {};   
+      var promise = {};
       promise.success = function(fn) {
         promise.then(function(data) {
           fn(data);
@@ -158,6 +158,40 @@ var BaasBox = (function() {
         return deferred.promise();
       },
 
+      //delete account
+      deleteAccount: function(user){
+        return $.ajax({
+          url: BaasBox.endPoint + '/admin/user/suspend/' + user,
+          method: 'PUT'
+        })
+      },
+      ////////
+
+      /*
+       Function to load a collection of agendas, which have been created in the same event
+       */
+      loadAgendaWithParams: function(collection, evId, params) {
+        var deferred = buildDeferred();
+        var url = BaasBox.endPoint + '/document/' + collection + '?where=eventID%3D%3F&params=' + evId;
+        var req = $.ajax({
+          url: url,
+          method: 'GET',
+          timeout: BaasBox.timeout,
+          dataType: 'json',
+          data: params
+        })
+          .done(function(res) {
+            deferred.resolve(res['data']);
+          })
+          .fail(function(error) {
+            deferred.reject(error);
+          })
+        return deferred.promise();
+      },
+
+
+      /////////
+
       logout: function(cb) {
         var deferred = buildDeferred();
         var u = getCurrentUser();
@@ -238,6 +272,28 @@ var BaasBox = (function() {
         })
       },
 
+      /*
+       Function to load a collection of agendas, which have been created in the same event
+       */
+      loadAgendaWithParams: function(collection, evId, params) {
+        var deferred = buildDeferred();
+        var url = BaasBox.endPoint + '/document/' + collection + '?where=eventID%3D%3F&params=' + evId;
+        var req = $.ajax({
+          url: url,
+          method: 'GET',
+          timeout: BaasBox.timeout,
+          dataType: 'json',
+          data: params
+        })
+          .done(function(res) {
+            deferred.resolve(res['data']);
+          })
+          .fail(function(error) {
+            deferred.reject(error);
+          })
+        return deferred.promise();
+      },
+
       loadCollectionWithParams: function(collection, params) {
         var deferred = buildDeferred();
         var url = BaasBox.endPoint + '/document/' + collection;
@@ -311,6 +367,57 @@ var BaasBox = (function() {
           })
         return deferred.promise();
       },
+      /*
+       function to update Event
+       */
+
+      updateEvent: function(object, evId) {
+        var deferred = buildDeferred();
+        url = BaasBox.endPoint + '/document/event/' + object.id + '/.' + 'eventId'; //
+        var json = JSON.stringify({
+          "data": evId
+        });
+        var req = $.ajax({
+          url: url,
+          type: 'PUT',
+          contentType: 'application/json',
+          dataType: 'json',
+          data: json
+        })
+          .done(function(res) {
+            deferred.resolve(res['data']);
+          })
+          .fail(function(error) {
+            deferred.reject(error);
+          })
+        return deferred.promise();
+      },
+      /*
+       function to add eventID to agendas, which have been created in this event
+       */
+
+      updateEventAgenda: function(object, evId) {
+        var deferred = buildDeferred();
+        url = BaasBox.endPoint + '/document/agenda/' + object.id + '/.' + 'eventID'; //
+        var json = JSON.stringify({
+          "data": evId
+        });
+        var req = $.ajax({
+          url: url,
+          type: 'PUT',
+          contentType: 'application/json',
+          dataType: 'json',
+          data: json
+        })
+          .done(function(res) {
+            deferred.resolve(res['data']);
+          })
+          .fail(function(error) {
+            deferred.reject(error);
+          })
+        return deferred.promise();
+      },
+      ///////////
 
       deleteObject: function(objectId, collection) {
         return $.ajax({
@@ -414,7 +521,7 @@ var BaasBox = (function() {
             url: BaasBox.endPoint + '/me',
             method: 'PUT',
             contentType: 'application/json',
-            data: JSON.stringify(params)          
+            data: JSON.stringify(params)
         });
       },
 
@@ -423,13 +530,17 @@ var BaasBox = (function() {
             url: BaasBox.endPoint + '/me/password',
             method: 'PUT',
             contentType: 'application/json',
-            data: JSON.stringify({old: oldPassword, new: newPassword})            
+            data: JSON.stringify({old: oldPassword, new: newPassword})
         });
       },
 
       resetPassword: function() {
         var user = getCurrentUser();
         return $.get(BaasBox.endPoint + '/user/' + user.username + '/password/reset');
+      },
+
+      resetPasswordForUser: function(user) {
+        return $.get(BaasBox.endPoint + '/user/' + user.email + '/password/reset');
       },
 
       followUser: function (username) {
@@ -453,10 +564,10 @@ var BaasBox = (function() {
 
 	    sendPushNotification: function(params) {
         return $.ajax({
-          url: BaasBox.endPoint + '/push/message', 
+          url: BaasBox.endPoint + '/push/message',
           method: 'POST',
           contentType: 'application/json',
-          data: JSON.stringify(params)  
+          data: JSON.stringify(params)
         })
       },
 
@@ -468,12 +579,16 @@ var BaasBox = (function() {
           mimeType: "multipart/form-data",
           contentType: false,
           cache: false,
-          processData:false       
+          processData:false
         })
       },
 
       fetchFile: function(fileId) {
         return $.get(BaasBox.endPoint + '/file/' + fileId + "?X-BB-SESSION=" + BaasBox.getCurrentUser().token)
+      },
+
+      getFileUrl: function (fileId) {
+        return ""+BaasBox.endPoint + '/file/' + fileId + "?download=true&X-BB-SESSION=" + BaasBox.getCurrentUser().token
       },
 
       deleteFile: function(fileId) {
